@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TestSanat</title>
+		<style type="text/css">
+			body {
+				background-color: #2A0F30;
+				color: #CCCCCC;
+				font-size: 20px;
+			}
+			#buttonPanel {
+				position: absolute;
+				height: 70px;
+				width:100%;
+				top:0px;
+				left:0px;
+				border-bottom-style: solid;
+				border-color: #FFFFFF;
+			}
+			.bPanelButton {
+				position:absolute;
+				left: 0px;
+				top: 0px;
+				background-color: #883388;
+				color: #FFFFFF;
+				width: 70px;
+				height: 70px;
+			}
+			
+			#optionsMenu {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 200px;
+				height: 300px;
+				background-color: #777799;
+				visibility: hidden;
+				opacity: 0.95;
+			}
+			#container {
+				background-color: #773377;
+				/*width: 90%;*/
+				/*margin-left: 5%;*/
+				border-width: 10px;
+				border-style: solid;
+				border-color: #773377;
+				height: 300px;
+			}
+			#outerContainer {
+				margin-top: 90px;
+				width: 90%;
+				margin-left: 5%;
+				border-style: double;
+				border-color: #FF00FF;
+			}
+			.wordOption {
+				position:relative;
+				margin-bottom:10px;
+				/*opacity: 0.8;*/
+				color: #000000;
+				border-style: ridge;
+				text-align: center;
+				vertical-align: middle;
+				border-color: #333333;
+				background-color: #AAAABB;
+				width: 15%;
+				height: 50px;
+			}
+			#wordlistCreator {
+				position: absolute;
+			}
+			#langChooser {
+				position: absolute;
+				left: 10px;
+				top: 10px;
+				visibility: hidden;
+				width: 500px;
+				height: 500px;
+				border-color: #BB66BB;
+				border-style: ridge;
+				border-width: 3px;
+			}
+			#langChooserBG {
+				left: 13px;
+				top: 13px;
+				position: absolute;
+				background-color: #443344;
+				visibility: hidden;
+				width: 500px;
+				height: 500px;
+				opacity: 0.95;
+			}
+			.langChoOpt {
+				border-style: solid;
+				border-width: 2px;
+				border-color: #FF00FF;
+				color: #FF00FF;
+				margin: 5px;
+				font-size: 30px;
+			}
+		</style>
+		<script type="text/javascript" src="WordList.js"></script>
+		<script type="text/javascript" src="Metadata.js"></script>
+		<script type="text/javascript" src="Word.js"></script>
+		<script type="text/javascript" src="ArrayUtils.js"></script>
+		<script type="text/javascript" src="Utils.js"></script>
+		
+		<!-- WordLists - [start] -->
+			<script src="wordLists/test.js"></script> <!-- Test words -->
+		<!-- WordLists - [end] -->
+		<script type="text/javascript">
+			var LANG_UMM_WHAT = new Tuple(-1, "Unknown_Language");
+			var LANG_ENG = new Tuple(0, "English");
+			var LANG_FIN = new Tuple(1, "Finnish");
+			var LANG_SWE = new Tuple(2, "Swedish");
+			
+			var langChooserOpenForA = true;
+			
+			var currentWordlist = [];
+			var testList = new WordList("Namee", "A", "B");
+			
+			var currLangA = LANG_ENG;
+			var currLangB = LANG_FIN;
+			
+			testList.metadata.author = "OkkapeL";
+			testList.metadata.info = "Just a little test list to test WordLists";
+			var testList2 = createWordListFromText("");
+			
+			function testii() {
+				if(isWordListValid(words_test_err)) {
+					document.getElementById("wot2").innerHTML = (words_test_err.length % 2);
+				}
+			}
+			
+			function noff() {
+				//alert(testList.metadata.getAllData());
+				//alert(testList2.name);
+				//alert(currLangB.b)
+			}
+			
+			function isWordListValid(list) {
+				if(list.length % 2 != 1) {
+					return true;
+				}
+				return false;
+			}
+			
+			function wordOptionClicked(text) {
+				alert(text);
+			}
+			
+			function bPanelButtonHover(obj) {
+				obj.style.backgroundColor = '#994499';
+			}
+			
+			function bPanelButtonUnhover(obj) {
+				obj.style.backgroundColor = '#883388';
+			}
+			
+			function langOptHover(obj) {
+				obj.style.color = '#AA00AA';
+				obj.style.borderColor = '#AA00AA';
+			}
+			
+			function langOptUnhover(obj) {
+				obj.style.color = "#FF00FF";
+				obj.style.borderColor = "#FF00FF";
+			}
+			
+			function langOptClicked(lang) {// Tuple<int, String> lang
+				//alert(lang.b);
+				if(langChooserOpenForA) {
+					currLangA = lang;
+				} else {
+					currLangB = lang;
+				}
+				updateLangDisplay();
+			}
+			
+			function updateLangDisplay() {
+				document.getElementById('lang_a').innerHTML=("Lang A: " + currLangA.b);
+				document.getElementById('lang_b').innerHTML=("Lang B: " + currLangB.b);
+			}
+			
+			function openLangChooserFor(a) { // boolean a
+				langChooserOpenForA = a;
+				document.getElementById('langChooser').style.visibility = 'visible';
+				document.getElementById('langChooserBG').style.visibility = 'visible';
+			}
+			
+			function closeLangChooser() {
+				document.getElementById('langChooser').style.visibility = 'hidden';
+				document.getElementById('langChooserBG').style.visibility = 'hidden';
+			}
+			
+		</script>
+	</head>
+	
+	<body onLoad="document.getElementById('wot').innerHTML = words_test;testii();noff();">
+		<div id="outerContainer">
+			<div id="container">
+				<div id="wot"> </div>
+				<div id="wot2"> </div>
+				Test
+				<div class="wordOption" onClick="wordOptionClicked(this.innerHTML);">Text</div>
+			</div>
+		</div>
+		<div id="buttonPanel">
+			<div id="optionsButton" class="bPanelButton" onMouseOver="this.style.color = '#FF0000';bPanelButtonHover(this);" onClick="document.getElementById('optionsMenu').style.visibility = 'visible';" onMouseOut="this.style.color = '#FFFFFF';bPanelButtonUnhover(this);">
+				<center style="margin-top:20px;">Opts</center>
+			</div>
+			
+			<div id="langA" class="bPanelButton" style="margin-left:70px;width:100px;" onMouseOver="this.style.color = '#FF0000';bPanelButtonHover(this);" onClick="openLangChooserFor(true);" onMouseOut="this.style.color = '#FFFFFF';bPanelButtonUnhover(this);">
+				<center style="margin-top:20px;" id="lang_a">Lang A: English</center>
+			</div>
+			
+			<div id="langB" class="bPanelButton" style="margin-left:170px;width:100px;" onMouseOver="this.style.color = '#FF0000';bPanelButtonHover(this);" onClick="openLangChooserFor(false);" onMouseOut="this.style.color = '#FFFFFF';bPanelButtonUnhover(this);">
+				<center style="margin-top:20px;" id="lang_b">Lang B: Finnish</center>
+			</div>
+			
+		</div>
+		
+		<div id="optionsMenu">
+			<span style="margin-left:180px;font-size:20px;color:#FF0000;" onClick="document.getElementById('optionsMenu').style.visibility = 'hidden';document.getElementById('optionsButton').style.visibility = 'visible';">X</span><br>
+			<span>Language A:</span>
+			
+			<select style="margin-left:10px;margin-top:0px;">
+				<option value="eng">ENGLISH</option>
+				<option value="fin">FINNISH</option>
+				<option value="swe">SWEDISH</option>
+			</select><br><br>
+			<span>Language B:</span>
+			<select style="margin-left:10px;margin-top:0px;">
+				<option value="eng">ENGLISH</option>
+				<option value="fin">FINNISH</option>
+				<option value="swe">SWEDISH</option>
+			</select>
+		</div>
+		
+		
+		
+		<div id="wordlistCreator">
+		</div>
+		
+		<div id="langChooserBG"></div>
+		<div id="langChooser">
+			<div style="margin-top:5px;">
+				<span class="langChoOpt" onMouseOver="langOptHover(this);" onMouseOut="langOptUnhover(this);" onClick="langOptClicked(LANG_ENG);closeLangChooser();">&nbsp;English&nbsp;</span>
+				<span class="langChoOpt" onMouseOver="langOptHover(this);" onMouseOut="langOptUnhover(this);" onClick="langOptClicked(LANG_FIN);closeLangChooser();">&nbsp;Finnish&nbsp;</span>
+				<span class="langChoOpt" onMouseOver="langOptHover(this);" onMouseOut="langOptUnhover(this);" onClick="langOptClicked(LANG_SWE);closeLangChooser();">&nbsp;Swedish&nbsp;</span>
+			</div>
+		</div>
+		
+	</body>
+</html>

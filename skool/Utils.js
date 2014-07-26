@@ -1,0 +1,5 @@
+
+function Tuple(a, b) {
+	this.a = a;
+	this.b = b;
+}
