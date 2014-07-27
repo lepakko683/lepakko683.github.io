@@ -11,3 +11,6 @@ function arraysSameLength(arr1, arr2) {
 	return arr1.length == arr2.length;
 }
 
+function getStrArrayAsStr(arr) {
+	return "[TODO]";
+}
