@@ -108,6 +108,14 @@
 				visibility: visible/*hidden*/;
 				
 			}
+			#wlCreatorEditor {
+				position: absolute;
+				left: 223px;
+				top: 0px;
+				bottom: 0px;
+				right: 0px;
+				background-color: #FFFFFF;
+			}
 			#wlCreatorWordlist {
 				position: absolute;
 				left: 0px;
@@ -134,6 +142,7 @@
 				text-align: right;
 			}
 		</style>
+		<script type="text/javascript" src="Category.js"></script>
 		<script type="text/javascript" src="WordListManager.js"></script>
 		<script type="text/javascript" src="WordList.js"></script>
 		<script type="text/javascript" src="Metadata.js"></script>
@@ -166,12 +175,23 @@
 				cnocat = cnocat.concat((ii2==0?"":"|")+splittered[ii2]);
 			}
 			
-			alert(cnocat);
+			//alert(cnocat);
 			//var tstWrd = createWordObjFromString(objStr);
 			
 			/*var WLCreatorWordlist = new WordList();*/
 			var currentWordlist = [];
-			var testList = new WordList("Namee", "A", "B", 1, 1);
+			var testList = new WordList("Namee", LANG_ENG, LANG_FIN, 3, 3);
+			var ws1 = ["a","b","c"];
+			var ws2 = ["0","1","2"];
+			var ws3 = ["aa","bb","cc"];
+			var ws4 = ["00","11","22"];
+			testList.addWordToEnd(new Word(ws1,ws2));
+			testList.addWordToEnd(new Word(ws3,ws4));
+			testList.metadata.author = "OkkapeL";
+			testList.metadata.info = "Default info.";
+			testList.metadata.creationDate = "29.7.2014";
+			
+			//alert(testList.getWordListAsText());
 			
 			var currLangA = LANG_ENG;
 			var currLangB = LANG_FIN;
@@ -342,6 +362,7 @@
 					<p class="wordDispB">AnsA, AnsB, AnsC</p>
 				</div>
 			</div>
+			<div id="wlCreatorEditor"></div>
 			<h2><center contenteditable="true">hello</center></h2>
 		</div>
 		

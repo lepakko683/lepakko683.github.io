@@ -5,7 +5,7 @@ function Metadata() {
 }
 
 Metadata.prototype.getAllData = function() {
-	return "{author:"+this.author+",info:"+this.info+",creationDate:"+this.creationDate+"}";
+	return "{author:\""+this.author+"\",info:\""+this.info+"\",creationDate:\""+this.creationDate+"\"}";
 };
 
 function createMetadataFromStr(str) {

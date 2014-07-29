@@ -22,7 +22,7 @@ Word.prototype.getAsString = function() {
 	}
 	
 	for(ii=0;ii<this.langB.length;ii++) {
-		WordsB = wordsB.concat((ii == 0 ? "" : ",")+this.langB[ii]);
+		wordsB = wordsB.concat((ii == 0 ? "" : ",")+this.langB[ii]);
 	}
 	
 	wordsA = wordsA.concat("]");
@@ -39,6 +39,13 @@ function createWordObjFromString(str) {
 		
 	}
 	alert("something went wrong...");
-	
-	
+}
+
+function getWordArrAsString(arr) {
+	var ret = "[";
+	var ii;
+	for(ii=0;ii<arr.length;ii++) {
+		ret = ret.concat((ii==0?"":",")+arr[ii].getAsString());
+	}
+	return ret.concat("]");
 }

@@ -43,5 +43,5 @@ function createWordListFromText(text) {
 }
 
 WordList.prototype.getWordListAsText = function() {
-	return "{name:\""+this.name+"\",langA:"+this.langA.a+",langB:"+this.langB.a+",words:"+getStrArrayAsString(this.words)+",metadata:"+this.metadata.getAllData()+"}";
+	return "{name:\""+this.name+"\",subWordsA:"+this.subWordsA+",subWordsB:"+this.subWordsB+",langA:"+this.langA.a+",langB:"+this.langB.a+",words:"+getWordArrAsString(this.words)+",metadata:"+this.metadata.getAllData()+"}";
 };
