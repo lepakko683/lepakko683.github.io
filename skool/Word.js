@@ -11,3 +11,34 @@ Word.prototype.compareTo = function(a, otherWord) { // compares this word to use
 	
 	}
 };
+
+Word.prototype.getAsString = function() {
+	var wordsA = "[";
+	var wordsB = "[";
+	
+	var ii;
+	for(ii=0;ii<this.langA.length;ii++) {
+		wordsA = wordsA.concat((ii == 0 ? "" : ",")+this.langA[ii]);
+	}
+	
+	for(ii=0;ii<this.langB.length;ii++) {
+		WordsB = wordsB.concat((ii == 0 ? "" : ",")+this.langB[ii]);
+	}
+	
+	wordsA = wordsA.concat("]");
+	wordsB = wordsB.concat("]");
+	return "{wordsA:"+wordsA+",wordsB:"+wordsB+"}";
+};
+
+function createWordObjFromString(str) {
+	var splitted = splitObjectString(str.substring(1, str.length-1));
+	if(splitted.length == 4) {
+		if(splitted[0] == "wordsA" && splitted[2] == "wordsB") {
+			return new Word(getFormattedStrAsStrArr(splitted[1]), getFormattedStrAsStrArr(splitted[3]));
+		}
+		
+	}
+	alert("something went wrong...");
+	
+	
+}

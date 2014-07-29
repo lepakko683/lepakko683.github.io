@@ -134,6 +134,7 @@
 				text-align: right;
 			}
 		</style>
+		<script type="text/javascript" src="WordListManager.js"></script>
 		<script type="text/javascript" src="WordList.js"></script>
 		<script type="text/javascript" src="Metadata.js"></script>
 		<script type="text/javascript" src="Word.js"></script>
@@ -144,12 +145,29 @@
 			<script src="wordLists/test.js"></script> <!-- Test words -->
 		<!-- WordLists - [end] -->
 		<script type="text/javascript">
+			var WORDLIST_MANAGER = new WordListManager();
+			
 			var LANG_UMM_WHAT = new Tuple(-1, "Unknown_Language");
 			var LANG_ENG = new Tuple(0, "English");
 			var LANG_FIN = new Tuple(1, "Finnish");
 			var LANG_SWE = new Tuple(2, "Swedish");
 			
+			var val = WORDLIST_MANAGER.getWordListsForLang(LANG_ENG);
+			
 			var langChooserOpenForA = true;
+			
+			var objStr = "{wordsA:[test,test2,test3],wordsB:[ans,ans2,ans3]}";
+			var wlObjStr = "{name:\"namees\",langA:,words:[{wordsA:[test,test2,test3],wordsB:[ans,ans2,ans3]},{wordsA:[test4,test5,test6],wordsB:[ans4,ans5,ans6]},{wordsA:[test7,test8,test9],wordsB:[ans7,ans8,ans9]}]}";
+ 			
+			var splittered = splitObjectString(objStr.substring(1, objStr.length-1));
+			var cnocat = "";
+			var ii2;
+			for(ii2 = 0;ii2<splittered.length;ii2++) {
+				cnocat = cnocat.concat((ii2==0?"":"|")+splittered[ii2]);
+			}
+			
+			alert(cnocat);
+			//var tstWrd = createWordObjFromString(objStr);
 			
 			/*var WLCreatorWordlist = new WordList();*/
 			var currentWordlist = [];
@@ -160,7 +178,7 @@
 			
 			testList.metadata.author = "OkkapeL";
 			testList.metadata.info = "Just a little test list to test WordLists";
-			var testList2 = createWordListFromText("");
+			var testList2 = createWordListFromText(wlObjStr.substring(1,wlObjStr.length-1));
 			
 			function testii() {
 				if(isWordListValid(words_test_err)) {
