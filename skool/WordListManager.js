@@ -4,7 +4,7 @@ function WordListManager() {
 }
 
 WordListManager.prototype.registerWordList = function(wordlist) {
-	this.wordLists[this.wordLists.length]=wordlist;
+	this.wordLists[this.wordLists.length] = wordlist;
 	
 };
 

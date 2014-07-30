@@ -38,7 +38,7 @@ WordList.prototype.addWordToEnd = function(word) {
 function createWordListFromText(text) {
 	var ret = new WordList("testitusMaximus", "aa", "bb");
 	splitted = splitObjectString(text);
-	alert(getArrPrtStr("|",splitted));
+// 	alert(getArrPrtStr("|",splitted));
 	return ret;
 }
 

@@ -4,9 +4,9 @@ function Category(categ) {
 	this.categ = categ;
 }
 
-Category.prototype.getAsString() {
+Category.prototype.getAsString = function() {
 	return "{categ:\""+this.categ+"\"}";
-}
+};
 
 function createCategoryFromStr(str) {
 	splitted = splitObjectString(str.substring(1, str.length-1));
