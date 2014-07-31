@@ -16,6 +16,7 @@
 				left:0px;
 				border-bottom-style: solid;
 				border-color: #FFFFFF;
+				background-color:#883388;
 			}
 			.bPanelButton {
 				position:absolute;
@@ -100,30 +101,29 @@
 				position: absolute;
 				left: 70px;
 				right: 70px;
-				bottom: 70px;
-				top: 70px;
-				background-color: #555555;
+				top: 115px;
+				height: 500px;
+				background-color: #005555;
 				border-color: #000000;
 				border-style: double;
 				visibility: visible/*hidden*/;
-				
+				z-index: 5;
 			}
 			#wlCreatorWordEditor {
 				visibility:hidden;
-			
 			}
 			#wlCreatorWordlistEditor {
-			
+				
 			
 			
 			}
 			.wlCreatorEditor {
 				position: absolute;
-				left: 223px;
+				left: 0px;
 				top: 0px;
 				bottom: 0px;
 				right: 0px;
-				background-color: #FFFFFF;
+				color: #000000;
 			}
 			#wlCreatorWordlist {
 				position: absolute;
@@ -160,6 +160,39 @@
 			.wordDispB {
 				text-align: right;
 			}
+			.wordInput {
+				width: 100px;
+			}
+			.addWordElement {
+				position:relative;
+				color: #00FFFF;
+				font-size: 30px;
+				top: 4px;
+			}
+			.removeWordElement {
+				position:relative;
+				color: #FF0000;
+				font-size: 30px;
+				top: 2px;
+			}
+			.wlEditorTab {
+				position: absolute;
+				top: 90px;
+				width: 200px;
+				height: 25px;
+				left: 70px;
+				background-color: #003535;
+				border-style: double;
+				border-color: #000000;
+				border-bottom-style: none;
+				color: #FFFFFF;
+			}
+			#wlWordlistEditorTab {
+			}
+			#wlWordEditorTab {
+				left: 280px;
+			}
+			
 		</style>
 		<script type="text/javascript" src="Category.js"></script>
 		<script type="text/javascript" src="WordListManager.js"></script>
@@ -172,170 +205,7 @@
 		<!-- WordLists - [start] -->
 			<script src="wordLists/test.js"></script> <!-- Test words -->
 		<!-- WordLists - [end] -->
-		<script type="text/javascript">
-			var WORDLIST_MANAGER = new WordListManager();
-			
-			var LANG_UMM_WHAT = new Tuple(-1, "Unknown_Language");
-			var LANG_ENG = new Tuple(0, "English");
-			var LANG_FIN = new Tuple(1, "Finnish");
-			var LANG_SWE = new Tuple(2, "Swedish");
-			
-			var val = WORDLIST_MANAGER.getWordListsForLang(LANG_ENG);
-			
-			var langChooserOpenForA = true;
-			
-			var objStr = "{wordsA:[test,test2,test3],wordsB:[ans,ans2,ans3]}";
-			var wlObjStr = "{name:\"namees\",langA:,words:[{wordsA:[test,test2,test3],wordsB:[ans,ans2,ans3]},{wordsA:[test4,test5,test6],wordsB:[ans4,ans5,ans6]},{wordsA:[test7,test8,test9],wordsB:[ans7,ans8,ans9]}]}";
- 			
-			var splittered = splitObjectString(objStr.substring(1, objStr.length-1));
-			var cnocat = "";
-			var ii2;
-			for(ii2 = 0;ii2<splittered.length;ii2++) {
-				cnocat = cnocat.concat((ii2==0?"":"|")+splittered[ii2]);
-			}
-			
-			//alert(cnocat);
-			//var tstWrd = createWordObjFromString(objStr);
-			
-			/*var WLCreatorWordlist = new WordList();*/
-			var currentWordlist = [];
-			var testList = new WordList("Namee", LANG_ENG, LANG_FIN, 3, 3);
-			var ws1 = ["a","b","c"];
-			var ws2 = ["0","1","2"];
-			var ws3 = ["aa","bb","cc"];
-			var ws4 = ["00","11","22"];
-			testList.addWordToEnd(new Word(ws1,ws2));
-			testList.addWordToEnd(new Word(ws3,ws4));
-			testList.metadata.author = "OkkapeL";
-			testList.metadata.info = "Default info.";
-			testList.metadata.creationDate = "29.7.2014";
-			
-			//alert(testList.getWordListAsText());
-			
-			var currLangA = LANG_ENG;
-			var currLangB = LANG_FIN;
-			
-			testList.metadata.author = "OkkapeL";
-			testList.metadata.info = "Just a little test list to test WordLists";
-			var testList2 = createWordListFromText(wlObjStr.substring(1,wlObjStr.length-1));
-			
-			function testii() {
-				if(isWordListValid(words_test_err)) {
-					document.getElementById("wot2").innerHTML = (words_test_err.length % 2);
-				}
-			}
-			
-			function noff() {
-				//alert(testList.metadata.getAllData());
-				//alert(testList2.name);
-				//alert(currLangB.b)
-			}
-			
-			function isWordListValid(list) {
-				if(list.length % 2 != 1) {
-					return true;
-				}
-				return false;
-			}
-			
-			function wordOptionClicked(text) {
-				alert(text);
-			}
-			
-			function bPanelButtonHover(obj) {
-				obj.style.backgroundColor = '#994499';
-				obj.style.borderBottomStyle = 'solid';
-			}
-			
-			function bPanelButtonUnhover(obj) {
-				obj.style.backgroundColor = '#883388';
-				obj.style.borderBottomStyle = 'none';
-			}
-			
-			function langOptHover(obj) {
-				obj.style.color = '#AA00AA';
-				obj.style.borderColor = '#AA00AA';
-			}
-			
-			function langOptUnhover(obj) {
-				obj.style.color = "#FF00FF";
-				obj.style.borderColor = "#FF00FF";
-			}
-			
-			function langOptClicked(lang) {// Tuple<int, String> lang
-				//alert(lang.b);
-				if(langChooserOpenForA) {
-					currLangA = lang;
-				} else {
-					currLangB = lang;
-				}
-				updateLangDisplay();
-			}
-			
-			function updateLangDisplay() {
-				document.getElementById('lang_a').innerHTML=("Lang A: " + currLangA.b);
-				document.getElementById('lang_b').innerHTML=("Lang B: " + currLangB.b);
-			}
-			
-			function openLangChooserFor(a) { // boolean a
-				langChooserOpenForA = a;
-				document.getElementById('langChooser').style.visibility = 'visible';
-				document.getElementById('langChooserBG').style.visibility = 'visible';
-			}
-			
-			function closeLangChooser() {
-				document.getElementById('langChooser').style.visibility = 'hidden';
-				document.getElementById('langChooserBG').style.visibility = 'hidden';
-			}
-			
-			function recreateWLCreatorWLDisplay() {
-				// delete all of class wordDisplay
-				// recreate all wordDisplay nodes
-			}
-			
-			function appendWordToWLCreatorWList() {
-			
-			
-			}
-			
-			function appendWordToWLCreatorWListEnd() {
-			
-			
-			}
-			
-			function appendWordToWLCreatorWListStart() {
-			
-			
-			}
-			
-			function wordDisplayHover(obj) {
-				if(obj.class != 'wordDisplaySelected') {
-					obj.style.backgroundColor = '#5F5F5F';
-					obj.style.borderColor = '#6F6F6F';
-				}
-			}
-			
-			function wordDisplayUnhover(obj) {
-				if(obj.class != 'wordDisplaySelected') {
-					obj.style.backgroundColor = '#6F6F6F';
-					obj.style.borderColor = '#7F7F7F';
-				}
-			}
-			
-			var lastSelectedWordDisp = null;
-			function selectWordDisp(obj) {
-				if(lastSelectedWordDisp != null) {
-					lastSelectedWordDisp.class = 'wordDisplay';
-					lastSelectedWordDisp.style.backgroundColor = '#6F6F6F';
-					lastSelectedWordDisp.style.borderColor = '#7F7F7F';
-				}
-				obj.class = 'wordDisplaySelected';
-				obj.style.backgroundColor = '#6F306F';
-				obj.style.borderColor = '#7F407F';
-				lastSelectedWordDisp = obj;
-			}
-			
-		</script>
+		<script type="text/javascript" src="mainJS.js"></script>
 	</head>
 	
 	<body onLoad="document.getElementById('wot').innerHTML = words_test;testii();noff();">
@@ -348,15 +218,15 @@
 			</div>
 		</div>
 		<div id="buttonPanel">
-			<div id="optionsButton" class="bPanelButton" onMouseOver="this.style.color = '#FF0000';bPanelButtonHover(this);" onClick="document.getElementById('optionsMenu').style.visibility = 'visible';" onMouseOut="this.style.color = '#FFFFFF';bPanelButtonUnhover(this);">
+			<div id="optionsButton" class="bPanelButton" onMouseOver="bPanelButtonHover(this);" onClick="document.getElementById('optionsMenu').style.visibility = 'visible';" onMouseOut="bPanelButtonUnhover(this);">
 				<center style="margin-top:20px;">Opts</center>
 			</div>
 			
-			<div id="langA" class="bPanelButton" style="margin-left:70px;width:100px;" onMouseOver="this.style.color = '#FF0000';bPanelButtonHover(this);" onClick="openLangChooserFor(true);" onMouseOut="this.style.color = '#FFFFFF';bPanelButtonUnhover(this);">
+			<div id="langA" class="bPanelButton" style="margin-left:70px;width:100px;" onMouseOver="bPanelButtonHover(this);" onClick="openLangChooserFor(true);" onMouseOut="bPanelButtonUnhover(this);">
 				<center style="margin-top:20px;" id="lang_a">Lang A: English</center>
 			</div>
 			
-			<div id="langB" class="bPanelButton" style="margin-left:170px;width:100px;" onMouseOver="this.style.color = '#FF0000';bPanelButtonHover(this);" onClick="openLangChooserFor(false);" onMouseOut="this.style.color = '#FFFFFF';bPanelButtonUnhover(this);">
+			<div id="langB" class="bPanelButton" style="margin-left:170px;width:100px;" onMouseOver="bPanelButtonHover(this);" onClick="openLangChooserFor(false);" onMouseOut="bPanelButtonUnhover(this);">
 				<center style="margin-top:20px;" id="lang_b">Lang B: Finnish</center>
 			</div>
 			
@@ -381,56 +251,52 @@
 		
 		
 		
-		<div id="wordlistCreator">
-			<div id="wlCreatorWordlist">
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-				<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
-					<p class="wordDispA">TestA, TestB, TestC</p>
-					<p class="wordDispB">AnsA, AnsB, AnsC</p>
-				</div>
-			</div>
+		<div id="wordlistCreator"> <!-- WORDLIST EDITOR -->
+			<!--<div id="wlChooser" style="position:absolute;left:0px;top:0px;width:223px;height:27px;background-color:#FFFFFF;">
+				<select style="width:223px;height:25px;">
+					<option value="newWordlist">New wordlist</option>
+					<option value="testlist">Testlist</option>
+				</select>
+			
+			</div>-->
+			
 			<div id="wlCreatorWordlistEditor" class="wlCreatorEditor">
-				<h2><center contenteditable="true">hello</center></h2>
+				<br>
+				Title: <input type="text" id="wordListInputTitle" style="width:300px;"><hr>
+				<b>Metadata</b><br>
+				&nbsp;&nbsp;Author: <input type="text" id="wordlistInputMetaAuthor" style="width:150px;"><br>
+				&nbsp;&nbsp;Creation Date: <input type="text" id="wordlistInputMetaAuthor" style="width:150px;"><br>
+				&nbsp;&nbsp;Info: <input type="text" id="wordlistInputMetaAuthor" style="width:150px;"><hr>
 			</div>
 			<div id="wlCreatorWordEditor" class="wlCreatorEditor">
-			
+				<div id="wlCreatorWordlist">
+					<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
+						<p class="wordDispA">TestA, TestB, TestC</p>
+						<p class="wordDispB">AnsA, AnsB, AnsC</p>
+					</div>
+					<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
+						<p class="wordDispA">TestA, TestB, TestC</p>
+						<p class="wordDispB">AnsA, AnsB, AnsC</p>
+					</div>
+					<div class="wordDisplay" onMouseOver="wordDisplayHover(this);" onMouseOut="wordDisplayUnhover(this);" onClick="selectWordDisp(this);">
+						<p class="wordDispA">TestA, TestB, TestC</p>
+						<p class="wordDispB">AnsA, AnsB, AnsC</p>
+					</div>
+				</div>
+				<div style="position:absolute;left:223px;right:0px;">
+					<br>
+					LangA: <input type="text" id="wordInputA0" class="wordInput"><span class="addWordElement">+</span><hr>
+					LangB: <input type="text" id="wordInputB0" class="wordInput"><span class="removeWordElement">-</span>
+				</div>
 			</div>
 			
+		</div> <!-- END OF WORDLIST EDITOR -->
+		
+		<div id="wlWordlistEditorTab" class="wlEditorTab" onClick="wlEditorTabClicked(this, 0);" style="z-index:6;background-color:#005555;">
+			&nbsp;Wordlist Editor
+		</div>
+		<div id="wlWordEditorTab" class="wlEditorTab" onClick="wlEditorTabClicked(this, 1);">
+			&nbsp;Word Editor
 		</div>
 		
 		<div id="langChooserBG"></div>
@@ -444,3 +310,4 @@
 		
 	</body>
 </html>
+
