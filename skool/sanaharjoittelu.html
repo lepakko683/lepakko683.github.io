@@ -230,6 +230,10 @@
 				<center style="margin-top:20px;" id="lang_b">Lang B: Finnish</center>
 			</div>
 			
+			<div id="wordlistSelector" class="bPanelButton" style="margin-left:270px;width:200px;" onMouseOver="bPanelButtonHover(this);" onClick="" onMouseOut="bPanelButtonUnhover(this);">
+				<center style="margin-top:20px;" id="lang_b">Wordlist</center>
+			</div>
+			
 		</div>
 		
 		<div id="optionsMenu">
@@ -251,7 +255,7 @@
 		
 		
 		
-		<div id="wordlistCreator"> <!-- WORDLIST EDITOR -->
+		<div id="wordlistCreator" style="visibility: hidden;"> <!-- WORDLIST EDITOR -->
 			<!--<div id="wlChooser" style="position:absolute;left:0px;top:0px;width:223px;height:27px;background-color:#FFFFFF;">
 				<select style="width:223px;height:25px;">
 					<option value="newWordlist">New wordlist</option>
@@ -292,10 +296,10 @@
 			
 		</div> <!-- END OF WORDLIST EDITOR -->
 		
-		<div id="wlWordlistEditorTab" class="wlEditorTab" onClick="wlEditorTabClicked(this, 0);" style="z-index:6;background-color:#005555;">
+		<div id="wlWordlistEditorTab" class="wlEditorTab" onClick="wlEditorTabClicked(this, 0);" style="z-index:6;background-color:#005555;visibility: hidden;">
 			&nbsp;Wordlist Editor
 		</div>
-		<div id="wlWordEditorTab" class="wlEditorTab" onClick="wlEditorTabClicked(this, 1);">
+		<div id="wlWordEditorTab" class="wlEditorTab" onClick="wlEditorTabClicked(this, 1);" style="visibility: hidden;">
 			&nbsp;Word Editor
 		</div>
 		
