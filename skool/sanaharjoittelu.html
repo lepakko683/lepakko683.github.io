@@ -29,6 +29,26 @@
 				border-bottom-style: none;
 				border-color: #00B0AA;
 			}
+			.bPanelMenu {
+				position:absolute;
+				top:70px;
+				height:50%;
+				background-color: #994499;
+				border-style:solid;
+				border-top-style: dotted;
+				border-width:1px;
+				border-top-width:3px;
+				border-bottom-width:3px;
+				border-color: #FFFFFF;
+				border-bottom-color: #00B0AA;
+				overflow-x: hidden;
+				overflow-y: auto;
+				
+			}
+			.bPanelMenuOption {
+			
+			
+			}
 			#optionsMenu {
 				position: absolute;
 				left: 0px;
@@ -222,17 +242,24 @@
 				<center style="margin-top:20px;">Opts</center>
 			</div>
 			
-			<div id="langA" class="bPanelButton" style="margin-left:70px;width:100px;" onMouseOver="bPanelButtonHover(this);" onClick="openLangChooserFor(true);" onMouseOut="bPanelButtonUnhover(this);">
+			<div id="langA" class="bPanelButton" style="margin-left:70px;width:120px;" onMouseOver="bPanelButtonHover(this);" onClick="openLangChooserFor(true);" onMouseOut="bPanelButtonUnhover(this);">
 				<center style="margin-top:20px;" id="lang_a">Lang A: English</center>
 			</div>
 			
-			<div id="langB" class="bPanelButton" style="margin-left:170px;width:100px;" onMouseOver="bPanelButtonHover(this);" onClick="openLangChooserFor(false);" onMouseOut="bPanelButtonUnhover(this);">
+			<div id="langB" class="bPanelButton" style="margin-left:190px;width:120px;" onMouseOver="bPanelButtonHover(this);" onClick="openLangChooserFor(false);" onMouseOut="bPanelButtonUnhover(this);">
 				<center style="margin-top:20px;" id="lang_b">Lang B: Finnish</center>
 			</div>
 			
-			<div id="wordlistSelector" class="bPanelButton" style="margin-left:270px;width:200px;" onMouseOver="bPanelButtonHover(this);" onClick="" onMouseOut="bPanelButtonUnhover(this);">
+			<div id="wordlistSelector" class="bPanelButton" style="margin-left:310px;width:200px;" onMouseOver="bPanelButtonHover(this);" onClick="" onMouseOut="bPanelButtonUnhover(this);">
 				<center style="margin-top:20px;" id="lang_b">Wordlist</center>
 			</div>
+			
+		</div>
+		
+		<div class="bPanelMenu" style="left:70px;width:120px;color:#FFFFFF;">
+			English
+			Finnish
+			Swedish
 			
 		</div>
 		
@@ -303,7 +330,8 @@
 			&nbsp;Word Editor
 		</div>
 		
-		<div id="langChooserBG"></div>
+		<div id="langChooserBG">
+		</div>
 		<div id="langChooser">
 			<div style="margin-top:5px;">
 				<span class="langChoOpt" onMouseOver="langOptHover(this);" onMouseOut="langOptUnhover(this);" onClick="langOptClicked(LANG_ENG);closeLangChooser();">&nbsp;English&nbsp;</span>
