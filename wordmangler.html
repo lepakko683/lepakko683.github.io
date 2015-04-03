@@ -1,0 +1,31 @@
+<html>
+
+<head>
+	<title>Word mangler</title>
+</head>
+<body>
+
+	<textarea autofocus id="tin" style="position: absolute; width: 80%; height: 50%; left: 10%;">
+Just some sample text that has no other purpose whatsoever than be an example
+	</textarea>
+	
+	<script type="text/javascript" language="javascript">
+		var tin = document.getElementById("tin");
+		
+		function getWords() {
+			tin.value = "hello";
+		}
+		
+		function mangle() {
+			getWords();
+		}
+	
+	
+	
+	</script>
+	
+	<a href="#" onClick="mangle()" style="background-color: #BFBFBF; color: #000000;">Mangle</a>
+
+</body>
+
+</html>
