@@ -1,30 +1,163 @@
 <html>
-
+<!-- file:///home/okkapel/Programming/Web/lepakko683.github.io/wordmangler.html -->
 <head>
-	<title>Word mangler</title>
+	<title>Word Mangler</title>
+	
+	<style type="text/css">
+		body {
+			background-color: #AFAFAF;
+		}
+	</style>
 </head>
 <body>
 
-	<textarea autofocus id="tin" style="position: absolute; width: 80%; height: 50%; left: 10%;">
-Just some sample text that has no other purpose whatsoever than to act as an example
-	</textarea>
+	<textarea autofocus id="tin" style="position: absolute; width: 80%; height: 50%; left: 10%; top: 0%;">Just some sample text that has no other purpose whatsoever than to act as an example</textarea>
+	
+	<textarea id="tout" style="position: absolute; width: 80%; height: 50%; left: 10%; top: 50%;"></textarea>
 	
 	<script type="text/javascript" language="javascript">
 		var tin = document.getElementById("tin");
 		
+		function glcc(str, idx) {
+			//alert(str.charCodeAt(idx));
+			if(idx >= str.length) {
+				return 0;
+			}
+			
+			var ch = str.charCodeAt(idx);
+			return ch > 64 && ch < 90 ? ch + 32 : ch;
+		}
+		
+		function toch(num) {
+			return String.fromCharCode(num);
+		}
+		
+		// exc - string of chars to exclude from text
+		function excChrs(text, exc) {
+			var ret = "";
+			for(var i = 0; i < text.length; i++) {
+				for(var j = 0; j < exc.length; j++) {
+					if(text.charAt(i) == exc.charAt(j)) {
+						break;
+					}
+					
+					if(j == exc.length - 1) {
+						ret += text.charAt(i);
+					}
+				}
+			}
+			return ret;
+		}
+		
+		function rept(chr, count) {
+			if(count < 1) {
+				return "";
+			}
+			
+			var ret = "";
+			
+			for(var i = 0; i < count; i++) {
+				ret += chr;
+			}
+			
+			return ret;
+		}
+		
+		function wordGen(samples, threshold, count) {
+			nsamples = [];
+			for(var i = 0; i < samples.length; i++) {
+				nsamples[i] = samples[i] + rept(" ", threshold);
+			}
+			samples = nsamples;
+			
+			var nwords = {};
+			var sptr = 0; // position in the samples array
+			var wptr = 0; // position in the new word
+			//for(var i = 0; i < samples; i++) {
+			//	if()
+			//}
+			var nword = samples[sptr].substring(wptr, wptr + threshold);
+			
+			for(var i = 0; i < count; i++) {
+				sptr++;
+				sptr %= samples.length;
+				var loop = true;
+				var sid = sptr; // sid = start id
+				while(loop) {
+					if(samples[sptr].length <= wptr) { // nword.substring(wptr, wptr + threshold) != samples[sptr]
+						sptr++;
+						sptr %= samples.length;
+					} else {
+						if(samples[sptr].charAt(wptr) == " " || samples[sptr].length <= wptr + threshold + 1) {
+							break;
+						} else {
+							if(samples[sptr].substring(wptr, wptr + threshold) == nword.substring(wptr, wptr + threshold)) {
+								nword += samples[sptr].charAt(wptr + threshold + 1);
+								if(nword.charAt(nword.length - 1) == " ") {
+									break;
+								}
+								wptr++;
+							}
+						}
+					}
+					
+					if(sid == sptr) {
+						if(samples[sptr].length < wptr + threshold + 1) {
+							break;
+						} else {
+							if(samples[sptr].charAt(wptr + threshold + 1) == " ") {
+								
+							}
+						}
+					}
+					
+					
+				}
+				wptr = 0;
+				
+				
+				nwords[i] = nword;
+				if(i < count - 1) {
+					sptr++;
+					sptr %= samples.length;
+					nword = samples[sptr]
+				}
+			}
+			
+			return 0;
+		}
+		
+		function diffSum(wa, wb) {
+			var ds = 0
+			ds += Math.abs(wa.length - wb.length);
+			
+			for(var i = 0;i < Math.min(wa.length, wb.length); i++) {
+				if(glcc(wa, i) != glcc(wb, i)) {
+					console.log("diff! " + i);
+					ds++;
+				}
+			}
+			return ds;
+		}
+		
 		function getWords() {
-			tin.value = "hello";
+			var words = excChrs(tin.value, ".,:;'\"").split(" ");
+			//alert(words.length); // toch(glcc(tin.value, 0))
+			//alert(diffSum(words[0], words[1]));
+			return words;
 		}
 		
 		function mangle() {
-			getWords();
+			var words = getWords();
+			//var nwords = wordGen(words, 1, 10);
+			var test = "hello worlds";
+			console.log(" " == test.charAt(5));
+			
 		}
-	
-	
 	
 	</script>
 	
-	<a href="#" onClick="mangle()" style="background-color: #BFBFBF; color: #000000;">Mangle</a>
+	<a href="#" onClick="mangle()" style="background-color: #BFBFBF; color: #000000; border-style: solid; border-bottom-color: #FFFFFF; border-right-color: #FFFFFF; border-radius:2px; text-decoration: none;">Mangle</a>
 
 </body>
 
