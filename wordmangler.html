@@ -16,6 +16,7 @@
 	<textarea id="tout" style="position: absolute; width: 80%; height: 50%; left: 10%; top: 50%;"></textarea>
 	
 	<script type="text/javascript" language="javascript">
+		var UNSTUCK_MAX = 100;
 		var tin = document.getElementById("tin");
 		
 		function glcc(str, idx) {
@@ -70,20 +71,21 @@
 			}
 			samples = nsamples;
 			
-			var nwords = {};
+			var nwords = [];
 			var sptr = 0; // position in the samples array
 			var wptr = 0; // position in the new word
 			//for(var i = 0; i < samples; i++) {
 			//	if()
 			//}
-			var nword = samples[sptr].substring(wptr, wptr + threshold);
+			var nword = "";
 			
 			for(var i = 0; i < count; i++) {
+				nword = samples[sptr].substring(wptr, wptr + threshold);
 				sptr++;
 				sptr %= samples.length;
-				var loop = true;
+				var unstuck = UNSTUCK_MAX;
 				var sid = sptr; // sid = start id
-				while(loop) {
+				while(unstuck > 0) {
 					if(samples[sptr].length <= wptr) { // nword.substring(wptr, wptr + threshold) != samples[sptr]
 						sptr++;
 						sptr %= samples.length;
@@ -93,10 +95,15 @@
 						} else {
 							if(samples[sptr].substring(wptr, wptr + threshold) == nword.substring(wptr, wptr + threshold)) {
 								nword += samples[sptr].charAt(wptr + threshold + 1);
+								
 								if(nword.charAt(nword.length - 1) == " ") {
 									break;
 								}
+								
 								wptr++;
+								
+								sptr++;
+								sptr %= samples.length;
 							}
 						}
 					}
@@ -106,25 +113,35 @@
 							break;
 						} else {
 							if(samples[sptr].charAt(wptr + threshold + 1) == " ") {
+								break;
+							} else {
+								nword += samples[sptr].charAt(wptr + threshold + 1);
+								wptr++;
 								
+								sptr++;
+								sptr %= samples.length;
 							}
 						}
 					}
 					
-					
+					unstuck--;
+					if(unstuck <= 0) {
+						console.log("Unstuck!");
+					}
 				}
 				wptr = 0;
-				
+				unstuck = UNSTUCK_MAX;
 				
 				nwords[i] = nword;
-				if(i < count - 1) {
-					sptr++;
-					sptr %= samples.length;
-					nword = samples[sptr]
-				}
+				nword = "";
+				//if(i < count - 1) {
+				//	sptr++;
+				//	sptr %= samples.length;
+				//	nword = samples[sptr];
+				//}
 			}
 			
-			return 0;
+			return nwords;
 		}
 		
 		function diffSum(wa, wb) {
@@ -149,10 +166,18 @@
 		
 		function mangle() {
 			var words = getWords();
-			//var nwords = wordGen(words, 1, 10);
-			var test = "hello worlds";
-			console.log(" " == test.charAt(5));
+			var nwords = wordGen(words, 1, 10);
 			
+			if(nwords == null) {
+				return;
+			}
+			
+			console.log("Generated " + nwords.length + " words: ");
+			for(var i = 0; i < nwords.length; i++) {
+				console.log(i + 1 + ". " + nwords[i]);
+			}
+			//var test = "hello worlds";
+			//console.log(" " == test.charAt(5));
 		}
 	
 	</script>
